@@ -43,6 +43,20 @@ def adicionar_tarefa():
 
     limpar_tela()
 
+def visualizar_tarefas():
+    limpar_tela()
+  
+    print(f"{'Índice'.ljust(1)}|{'Nome'.ljust(40)}|Completada")
+
+    for indice, tarefa in enumerate(lista_de_tarefas, start=1):
+        nome = tarefa["nome"]
+        completada = tarefa["completada"]
+
+        print(f"{str(indice).ljust(5)} |{nome.ljust(40)}|{'✅' if completada else ''}")
+
+    sair = input("\nPressiona 'enter' para sair ")  
+
+    limpar_tela()  
 while True:
     exibir_titulo()
     exibir_menu()
@@ -51,7 +65,7 @@ while True:
     if opcao_selecionada == 1:
         adicionar_tarefa()
     elif opcao_selecionada == 2:
-        ...
+        visualizar_tarefas()
     elif opcao_selecionada == 3:
         ...
     elif opcao_selecionada == 4:
