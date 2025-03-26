@@ -90,7 +90,6 @@ def atualizar_tarefa():
 
     input("\nPressione 'enter' para continuar...")
     limpar_tela()
-
 def completar_tarefa():
     limpar_tela()
 
@@ -114,13 +113,24 @@ def completar_tarefa():
         indice_ajustado = indice - 1
 
         if 0 <= indice_ajustado < len(lista_de_tarefas):
-            """novo_nome = input("Digite o novo nome da tarefa: ")
-            lista_de_tarefas[indice_ajustado]["nome"] = novo_nome"""
             lista_de_tarefas[indice_ajustado]["completada"] = True
             print("Tarefa completada!")
         else:
             print("Índice inválido!")
     limpar_tela()
+def deletar_tarefas_completadas():
+    limpar_tela()
+
+    if not any(tarefa["completada"] for tarefa in lista_de_tarefas):
+        print("Não há tarefas completadas para deletar.")
+    else:
+        # Remove tarefas completadas diretamente na lista original (sem reatribuir)
+        lista_de_tarefas[:] = [tarefa for tarefa in lista_de_tarefas if not tarefa["completada"]]
+        print("Tarefas completadas foram deletadas com sucesso!")
+
+    input("\nPressione 'enter' para continuar...")
+    limpar_tela()
+
 while True:
     exibir_titulo()
     exibir_menu()
@@ -135,7 +145,7 @@ while True:
     elif opcao_selecionada == 4:
         completar_tarefa()
     elif opcao_selecionada == 5:
-        ...
+        deletar_tarefas_completadas()
     else:
         break
 
