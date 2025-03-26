@@ -57,6 +57,42 @@ def visualizar_tarefas():
     sair = input("\nPressiona 'enter' para sair ")  
 
     limpar_tela()  
+
+def atualizar_tarefa():
+    limpar_tela()
+  
+    if len(lista_de_tarefas) == 0:
+        print("Lista de tarefas vazia")
+    
+        sair = input("\nPressiona 'enter' para sair ")
+
+        limpar_tela()
+    else:
+        print(f"{'Índice'.ljust(1)}|{'Nome'.ljust(40)}|Completada")
+
+        for indice, tarefa in enumerate(lista_de_tarefas, start=1):
+            nome = tarefa["nome"]
+            completada = tarefa["completada"]
+
+            print(f"{str(indice).ljust(5)} |{nome.ljust(40)}|{'✅' if completada else ''}")
+        
+        indice = int(input("\nDigite o indice da tarefa que deseja editar: "))
+        
+        """
+        Em Python, listas usam índice base 0, mas como você está mostrando as tarefas para o usuário começando do 1, precisa ajustar o índice informado subtraindo 1.
+        """
+        indice_ajustado = indice - 1
+
+        if 0 <= indice_ajustado < len(lista_de_tarefas):
+            novo_nome = input("Digite o novo nome da tarefa: ")
+            lista_de_tarefas[indice_ajustado]["nome"] = novo_nome
+            print("Tarefa atualizada com sucesso!")
+        else:
+            print("Índice inválido!")
+
+    input("\nPressione 'enter' para continuar...")
+    limpar_tela()
+
 while True:
     exibir_titulo()
     exibir_menu()
@@ -67,7 +103,7 @@ while True:
     elif opcao_selecionada == 2:
         visualizar_tarefas()
     elif opcao_selecionada == 3:
-        ...
+        atualizar_tarefa()
     elif opcao_selecionada == 4:
         ...
     elif opcao_selecionada == 5:
