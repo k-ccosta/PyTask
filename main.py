@@ -42,7 +42,6 @@ def adicionar_tarefa():
     lista_de_tarefas.append(tarefa)
 
     limpar_tela()
-
 def visualizar_tarefas():
     limpar_tela()
   
@@ -57,7 +56,6 @@ def visualizar_tarefas():
     sair = input("\nPressiona 'enter' para sair ")  
 
     limpar_tela()  
-
 def atualizar_tarefa():
     limpar_tela()
   
@@ -93,6 +91,36 @@ def atualizar_tarefa():
     input("\nPressione 'enter' para continuar...")
     limpar_tela()
 
+def completar_tarefa():
+    limpar_tela()
+
+    if len(lista_de_tarefas) == 0:
+        print("Lista de tarefas vazia")
+    
+        sair = input("\nPressiona 'enter' para sair ")
+
+        limpar_tela()
+    else:
+        print(f"{'Índice'.ljust(1)}|{'Nome'.ljust(40)}|Completada")
+
+        for indice, tarefa in enumerate(lista_de_tarefas, start=1):
+            nome = tarefa["nome"]
+            completada = tarefa["completada"]
+
+            print(f"{str(indice).ljust(5)} |{nome.ljust(40)}|{'✅' if completada else ''}")
+        
+        indice = int(input("\nDigite o indice da tarefa que deseja completar: "))
+        
+        indice_ajustado = indice - 1
+
+        if 0 <= indice_ajustado < len(lista_de_tarefas):
+            """novo_nome = input("Digite o novo nome da tarefa: ")
+            lista_de_tarefas[indice_ajustado]["nome"] = novo_nome"""
+            lista_de_tarefas[indice_ajustado]["completada"] = True
+            print("Tarefa completada!")
+        else:
+            print("Índice inválido!")
+    limpar_tela()
 while True:
     exibir_titulo()
     exibir_menu()
@@ -105,7 +133,7 @@ while True:
     elif opcao_selecionada == 3:
         atualizar_tarefa()
     elif opcao_selecionada == 4:
-        ...
+        completar_tarefa()
     elif opcao_selecionada == 5:
         ...
     else:
